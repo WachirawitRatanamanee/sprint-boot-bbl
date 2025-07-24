@@ -1,5 +1,6 @@
 package com.wachirawit.interview.service;
 
+import com.wachirawit.interview.exception.UserNotFoundException;
 import com.wachirawit.interview.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ public class UserServiceImp implements UserService {
                 return ResponseEntity.ok(user);
             }
         }
-        return ResponseEntity.notFound().build();
+        throw new UserNotFoundException(id);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class UserServiceImp implements UserService {
                 return ResponseEntity.ok(user);
             }
         }
-        return ResponseEntity.notFound().build();
+        throw new UserNotFoundException(userId);
     }
 
     @Override
@@ -83,6 +84,6 @@ public class UserServiceImp implements UserService {
                 return ResponseEntity.ok(deletedUser);
             }
         }
-        return ResponseEntity.notFound().build();
+        throw new UserNotFoundException(userId);
     }
 }
